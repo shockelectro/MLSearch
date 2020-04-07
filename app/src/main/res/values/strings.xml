@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Alertas de Mercado Libre</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="lista_busqueda">Lista Busqueda</string>
+    <string name="registrar_busqueda">Registrar Busqueda</string>
+    <string name="consulta_individual">Consulta Individual</string>
+    <string name="consulta_lista">Consulta Lista</string>
+    <string name="action_edit">Editar</string>
+    <string name="title_activity_alerta_detail">Alerta Detalle</string>
+    <string name="title_activity_add_edit">Añadir/Editar Alerta</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="field_error">Ingresa un valor</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="appbar_scrolling_view_behavior">appbar_scrolling_view_behavior</string>
+
+</resources>
