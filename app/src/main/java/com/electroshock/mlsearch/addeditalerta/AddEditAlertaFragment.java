@@ -18,8 +18,7 @@ import android.widget.Toast;
 
 import com.electroshock.mlsearch.R;
 import com.electroshock.mlsearch.data.Alerta;
-import com.electroshock.mlsearch.data.Item;
-import com.electroshock.mlsearch.data.ItemDbHelper;
+import com.electroshock.mlsearch.data.DbHelper;
 
 /**
  * Vista para creación/edición de un Alerta
@@ -28,7 +27,7 @@ public class AddEditAlertaFragment extends Fragment {
     private static final String ARG_ALERTA_ID = "arg_alerta_id";
 
     private String mAlertaId;
-    private ItemDbHelper mItemsDbHelper;
+    private DbHelper mItemsDbHelper;
     private FloatingActionButton mSaveButton;
     private TextInputEditText mTittle;
     private TextInputEditText mCategoryId;
@@ -89,7 +88,7 @@ public class AddEditAlertaFragment extends Fragment {
             }
         });
 
-        mItemsDbHelper = new ItemDbHelper(getActivity());
+        mItemsDbHelper = new DbHelper(getActivity());
 
         // Carga de datos
         if (mAlertaId != null) {

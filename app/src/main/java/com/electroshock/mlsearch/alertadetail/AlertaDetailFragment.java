@@ -20,7 +20,7 @@ import com.electroshock.mlsearch.addeditalerta.AddEditAlertaActivity;
 import com.electroshock.mlsearch.alerta.AlertaActivity;
 import com.electroshock.mlsearch.alerta.AlertasFragment;
 import com.electroshock.mlsearch.data.Alerta;
-import com.electroshock.mlsearch.data.ItemDbHelper;
+import com.electroshock.mlsearch.data.DbHelper;
 
 public class AlertaDetailFragment extends Fragment {
     private static final String ARG_ALERTA_ID = "alertaId";
@@ -34,7 +34,7 @@ public class AlertaDetailFragment extends Fragment {
     private TextView mPrecioInf;
     private TextView mPrecioSup;
 
-    private ItemDbHelper mItemsDbHelper;
+    private DbHelper mItemsDbHelper;
 
     public AlertaDetailFragment() {
         // Required empty public constructor
@@ -69,7 +69,7 @@ public class AlertaDetailFragment extends Fragment {
         mPrecioInf = root.findViewById(R.id.tv_precioInf);
         mPrecioSup = root.findViewById(R.id.tv_precioSup);
 
-        mItemsDbHelper = new ItemDbHelper(getActivity());
+        mItemsDbHelper = new DbHelper(getActivity());
 
         loadAlerta();
 

@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.electroshock.mlsearch.ProductAdapter;
 import com.electroshock.mlsearch.R;
 import com.electroshock.mlsearch.data.Alerta;
-import com.electroshock.mlsearch.data.ItemDbHelper;
+import com.electroshock.mlsearch.data.DbHelper;
 import com.electroshock.mlsearch.model.NoteML;
 import com.electroshock.mlsearch.model.Producto;
 import com.google.gson.Gson;
@@ -37,11 +37,11 @@ import java.util.List;
 
 public class ConsultaActivity extends AppCompatActivity {
 
-
-    private  String URL_TO_HIT = "https://api.mercadolibre.com/sites/MLA/search?category=MLA1652&q=i7&limit=30&condition=used&since=today&price=*-24000.0";
+    //TODO Url de busqueda en ML
+    private  String URL_TO_HIT = "https://api.mercadolibre.com/sites/MLA/search?category=MLA1652&q=i5&limit=30&condition=used&since=today&price=*-24000.0";
     private ListView lvProductos;
     //private ProgressDialog dialog;
-    private ItemDbHelper mItemsDbHelper;
+    private DbHelper mItemsDbHelper;
 
 
     @Override
@@ -79,7 +79,7 @@ public class ConsultaActivity extends AppCompatActivity {
 
         lvProductos = findViewById(R.id.lvProductos);
 
-        mItemsDbHelper = new ItemDbHelper(this);
+        mItemsDbHelper = new DbHelper(this);
 
         // TODO EXCEPTION
         // getIntent apunta a NULL

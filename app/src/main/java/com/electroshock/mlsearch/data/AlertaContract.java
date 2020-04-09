@@ -1,6 +1,8 @@
 package com.electroshock.mlsearch.data;
 /**
  * Esquema de la bd
+ *
+ * TODO La pasé a dbSchemaContract, ver de borrar
  */
 import android.provider.BaseColumns;
 

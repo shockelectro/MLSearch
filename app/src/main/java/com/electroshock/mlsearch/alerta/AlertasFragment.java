@@ -19,12 +19,12 @@ import com.electroshock.mlsearch.R;
 import com.electroshock.mlsearch.addeditalerta.AddEditAlertaActivity;
 import com.electroshock.mlsearch.alertadetail.AlertaDetailActivity;
 import com.electroshock.mlsearch.data.AlertaContract;
-import com.electroshock.mlsearch.data.ItemDbHelper;
+import com.electroshock.mlsearch.data.DbHelper;
 
 public class AlertasFragment extends Fragment {
     public static final int REQUEST_UPDATE_DELETE_ALERT = 2;
 
-    private ItemDbHelper mItemsDbHelper;
+    private DbHelper mItemsDbHelper;
 
     private ListView mAlertasList;
     private AlertasCursorAdapter mAlertasAdapter;
@@ -78,10 +78,10 @@ public class AlertasFragment extends Fragment {
         });
 
         //TODO Elimina database
-        getActivity().deleteDatabase(ItemDbHelper.DATABASE_NAME);
+        getActivity().deleteDatabase(DbHelper.DATABASE_NAME);
 
         // Instancia de helper
-        mItemsDbHelper = new ItemDbHelper(getActivity());
+        mItemsDbHelper = new DbHelper(getActivity());
 
         // Carga de datos
         loadAlertas();
@@ -125,10 +125,10 @@ public class AlertasFragment extends Fragment {
     }
 
     private static class AlertasLoadTask extends AsyncTask<Void, Void, Cursor> {
-        private ItemDbHelper mItemsDbHelper;
+        private DbHelper mItemsDbHelper;
         private AlertasCursorAdapter mAlertasAdapter;
 
-        public AlertasLoadTask(ItemDbHelper mItemsDbHelper, AlertasCursorAdapter mAlertasAdapter) {
+        public AlertasLoadTask(DbHelper mItemsDbHelper, AlertasCursorAdapter mAlertasAdapter) {
             this.mItemsDbHelper = mItemsDbHelper;
             this.mAlertasAdapter = mAlertasAdapter;
         }

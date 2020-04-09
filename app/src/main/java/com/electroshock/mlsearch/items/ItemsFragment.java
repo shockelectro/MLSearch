@@ -15,7 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.design.widget.FloatingActionButton;
 
 import com.electroshock.mlsearch.addeditalerta.AddEditAlertaActivity;
-import com.electroshock.mlsearch.data.ItemDbHelper;
+import com.electroshock.mlsearch.data.DbHelper;
 import com.electroshock.mlsearch.data.ItemContract.ItemEntry;
 import com.electroshock.mlsearch.itemdetail.ItemDetailActivity;
 
@@ -24,7 +24,7 @@ import com.electroshock.mlsearch.R;
 public class ItemsFragment extends Fragment {
     public static final int REQUEST_UPDATE_DELETE_ITEM = 2;
 
-    private ItemDbHelper mItemsDbHelper;
+    private DbHelper mItemsDbHelper;
 
     private ListView mItemsList;
     private ItemsCursorAdapter mItemsAdapter;
@@ -74,7 +74,7 @@ public class ItemsFragment extends Fragment {
         //getActivity().deleteDatabase(ItemDbHelper.DATABASE_NAME);
 
         // Instancia de helper
-        mItemsDbHelper = new ItemDbHelper(getActivity());
+        mItemsDbHelper = new DbHelper(getActivity());
 
         // Carga de datos
         loadItems();

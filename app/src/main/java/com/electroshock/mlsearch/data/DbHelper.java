@@ -10,47 +10,24 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.electroshock.mlsearch.data.ItemContract.ItemEntry;
 import com.electroshock.mlsearch.data.AlertaContract.AlertaEntry;
+import com.electroshock.mlsearch.sqlite.dbSchemaContract;
 
-public class ItemDbHelper extends SQLiteOpenHelper {
+
+public class DbHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "itemsMA5.db";
 
-    public ItemDbHelper(Context context) {
+    public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + ItemEntry.TABLE_NAME + " ("
-                + ItemEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + ItemEntry.ID + " TEXT NOT NULL,"
-                + ItemEntry.TITTLE + " TEXT NOT NULL,"
-                + ItemEntry.STATUS + " TEXT,"
-                + ItemEntry.SELLER_ID + " INT,"
-                + ItemEntry.CATEGORY_ID + " TEXT NOT NULL,"
-                + ItemEntry.START_TIME + " DATETIME,"
-                + ItemEntry.STOP_TIME + " DATETIME,"
-                + ItemEntry.LAST_UPDATE + " DATETIME,"
-                + ItemEntry.DATE_CREATED + " DATETIME,"
-                + ItemEntry.GEOLAT + " POINT,"
-                + ItemEntry.GEOLON + " POINT,"
-                + ItemEntry.PRECIOS + " TEXT,"
-                + "UNIQUE (" + ItemEntry.ID + "))");
+        //Este metodo se ejecuta por unica vez
+        db.execSQL(dbSchemaContract.CREAR_TABLA_ITEM);
+        db.execSQL(dbSchemaContract.CREAR_TABLA_ALERTA);
 
-        db.execSQL("CREATE TABLE " + AlertaEntry.TABLE_NAME + " ("
-                + AlertaEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + AlertaEntry.TITTLE + " TEXT NOT NULL,"
-                + AlertaEntry.STATUS + " TEXT,"
-                + AlertaEntry.CATEGORY_ID + " TEXT NOT NULL,"
-                + AlertaEntry.START_TIME + " DATETIME,"
-                + AlertaEntry.STOP_TIME + " DATETIME,"
-                + AlertaEntry.DATE_CREATED + " DATETIME,"
-                + AlertaEntry.PRECIO_INF + " INTEGER,"
-                + AlertaEntry.PRECIO_SUP + " INTEGER,"
-                + "UNIQUE (" + ItemEntry._ID + "))");
-
-
-        // Insertar datos ficticios para prueba inicial
+        // TInsertar datos ficticios para prueba inicial
         mockData(db);
         mockDataAlertas(db);
     }
@@ -74,6 +51,9 @@ public class ItemDbHelper extends SQLiteOpenHelper {
         mockAlerta(sqLiteDatabase, new Alerta("i7","MLA399858", "nuevo","1000","20000"));
         mockAlerta(sqLiteDatabase, new Alerta("i3","MLA098234","usado", "40","10000"));
         mockAlerta(sqLiteDatabase, new Alerta("i5","MLA923842","usado", "0","10000"));
+    }
+
+    private void mockRegistroBusqueda(SQLiteDatabase sqLiteDatabase){
 
     }
 

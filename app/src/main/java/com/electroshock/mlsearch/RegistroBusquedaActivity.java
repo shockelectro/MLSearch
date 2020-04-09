@@ -8,12 +8,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.electroshock.mlsearch.data.DbHelper;
 import com.electroshock.mlsearch.sqlite.ConexionSQLiteHelper;
-import com.electroshock.mlsearch.sqlite.dbSchema;
+import com.electroshock.mlsearch.sqlite.dbSchemaContract;
 
 public class RegistroBusquedaActivity extends AppCompatActivity {
 
-    EditText campoCategoria, campoQuery, campoPrecioMin, campoPrecioMax, campoEstado;
+    EditText campoId, campoCategoria, campoQuery, campoPrecioMin, campoPrecioMax, campoEstado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +43,13 @@ public class RegistroBusquedaActivity extends AppCompatActivity {
 
 
 
-        String insert="INSERT INTO "+ dbSchema.Busquedas.TABLA_BUSQUEDA
+        String insert="INSERT INTO "+ dbSchemaContract.BusquedasEntry.TABLA_BUSQUEDA
                 +" ( " +
-                dbSchema.Busquedas.COLUM_CATEGORIA + "," +
-                dbSchema.Busquedas.COLUM_QUERY +","+
-                dbSchema.Busquedas.COLUM_PRECIO_MIN + ","+
-                dbSchema.Busquedas.COLUM_PRECIO_MIN + ","+
-                dbSchema.Busquedas.COLUM_ESTADO + ")" +
+                dbSchemaContract.BusquedasEntry.COLUM_CATEGORIA + "," +
+                dbSchemaContract.BusquedasEntry.COLUM_QUERY +","+
+                dbSchemaContract.BusquedasEntry.COLUM_PRECIO_MIN + ","+
+                dbSchemaContract.BusquedasEntry.COLUM_PRECIO_MIN + ","+
+                dbSchemaContract.BusquedasEntry.COLUM_ESTADO + ")" +
                 " VALUES ('"+
                 campoCategoria.getText().toString()+"', '"+
                 campoQuery.getText().toString()+"','" +
@@ -62,20 +63,29 @@ public class RegistroBusquedaActivity extends AppCompatActivity {
 
 
     private void registrarBusqueda() {
-        ConexionSQLiteHelper conn=new ConexionSQLiteHelper(this,"alerta",null,2);
+        DbHelper mItemsDbHelper = new DbHelper(this);
 
-        SQLiteDatabase db=conn.getWritableDatabase();
+        SQLiteDatabase sqLiteDatabase = mItemsDbHelper.getWritableDatabase();
+        //ConexionSQLiteHelper conn=new ConexionSQLiteHelper(this,"alerta",null,2);
+
+        //SQLiteDatabase db=conn.getWritableDatabase();
 
         ContentValues values=new ContentValues();
-        values.put(dbSchema.Busquedas.COLUM_CATEGORIA, campoCategoria.getText().toString());
-        values.put(dbSchema.Busquedas.COLUM_QUERY, campoQuery.getText().toString());
-        values.put(dbSchema.Busquedas.COLUM_PRECIO_MIN, campoPrecioMin.getText().toString());
-        values.put(dbSchema.Busquedas.COLUM_PRECIO_MAX, campoPrecioMax.getText().toString());
-        values.put(dbSchema.Busquedas.COLUM_ESTADO, campoEstado.getText().toString());
 
-        Long idResultante=db.insert(dbSchema.Busquedas.TABLA_BUSQUEDA, dbSchema.CAMPO_ID,values);
+        //values.put(dbSchemaContract.BusquedasEntry.COLUM_ID_BUSQUEDA, campoCategoria.getText().toString());
+        values.put(dbSchemaContract.BusquedasEntry.COLUM_CATEGORIA, campoCategoria.getText().toString());
+        values.put(dbSchemaContract.BusquedasEntry.COLUM_QUERY, campoQuery.getText().toString());
+        values.put(dbSchemaContract.BusquedasEntry.COLUM_PRECIO_MIN, campoPrecioMin.getText().toString());
+        values.put(dbSchemaContract.BusquedasEntry.COLUM_PRECIO_MAX, campoPrecioMax.getText().toString());
+        values.put(dbSchemaContract.BusquedasEntry.COLUM_ESTADO, campoEstado.getText().toString());
 
-        Toast.makeText(getApplicationContext(),"Id Registro: "+idResultante,Toast.LENGTH_SHORT).show();
-        db.close();
+
+        Long idResultante=sqLiteDatabase.insert(dbSchemaContract.BusquedasEntry.TABLA_BUSQUEDA, null,values);
+        if (idResultante == -1)
+            Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(getApplicationContext(),"Id Registro: "+idResultante,Toast.LENGTH_SHORT).show();
+
+        //sqLiteDatabase.close();
     }
 }

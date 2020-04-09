@@ -21,7 +21,7 @@ import com.bumptech.glide.Glide;
 import com.electroshock.mlsearch.R;
 import com.electroshock.mlsearch.addeditalerta.AddEditAlertaActivity;
 import com.electroshock.mlsearch.data.Item;
-import com.electroshock.mlsearch.data.ItemDbHelper;
+import com.electroshock.mlsearch.data.DbHelper;
 import com.electroshock.mlsearch.items.ItemsActivity;
 import com.electroshock.mlsearch.items.ItemsFragment;
 
@@ -39,7 +39,7 @@ public class ItemDetailFragment extends Fragment {
     private TextView mSpecialty;
     private TextView mBio;
 
-    private ItemDbHelper mItemsDbHelper;
+    private DbHelper mItemsDbHelper;
 
 
     public ItemDetailFragment() {
@@ -75,7 +75,7 @@ public class ItemDetailFragment extends Fragment {
         mSpecialty = (TextView) root.findViewById(R.id.tv_estado);
         mBio = (TextView) root.findViewById(R.id.tv_bio);
 
-        mItemsDbHelper = new ItemDbHelper(getActivity());
+        mItemsDbHelper = new DbHelper(getActivity());
 
         loadLawyer();
 

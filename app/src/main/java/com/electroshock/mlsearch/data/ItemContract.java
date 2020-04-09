@@ -1,11 +1,15 @@
 package com.electroshock.mlsearch.data;
+/**
+ * Esquema de la bd
+ *
+ * TODO La pasé a dbSchemaContract, ver de borrar
+ */
 
 import android.provider.BaseColumns;
 
 public class ItemContract {
     public static abstract class ItemEntry implements BaseColumns {
         public static final String TABLE_NAME ="item";
-
         public static final String ID = "id";
         public static final String TITTLE = "tittle";
         public static final String STATUS = "status";
