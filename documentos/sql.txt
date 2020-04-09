@@ -1,0 +1,24 @@
+CREATE TABLE table1 (
+    columnA INTEGER NOT NULL,
+    columnB INTEGER NOT NULL,
+    PRIMARY KEY (columnA, columnB)
+);
+If your columns are foreign keys of other tables (common case) :
+
+CREATE TABLE table1 (
+    table2_id INTEGER NOT NULL,
+    table3_id INTEGER NOT NULL,
+    FOREIGN KEY (table2_id) REFERENCES table2(id),
+    FOREIGN KEY (table3_id) REFERENCES table3(id),
+    PRIMARY KEY (table2_id, table3_id)
+);
+
+CREATE TABLE table2 (
+    id INTEGER NOT NULL,
+    PRIMARY KEY id
+);
+
+CREATE TABLE table3 (
+    id INTEGER NOT NULL,
+    PRIMARY KEY id
+);

@@ -1,0 +1,120 @@
+
+FILTROS
+
+ "filters": [
+    {
+      "id": "condition",
+      "name": "Condición",
+      "type": "text",
+      "values": [
+        {
+          "id": "used",
+          "name": "Used"
+        }
+      ]
+    },
+    {
+      "id": "category",
+      "name": "Categories",
+      "type": "text",
+      "values": [
+        {
+          "id": "MLA1652",
+          "name": "Notebooks",
+          "path_from_root": [
+            {
+              "id": "MLA1648",
+              "name": "Computación"
+            },
+            {
+              "id": "MLA4072",
+              "name": "Notebooks y Accesorios"
+            },
+            {
+              "id": "MLA1652",
+              "name": "Notebooks"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+
+------------------------
+
+DESDE - HASTA ---  "available_filters": 
+
+    {
+      "id": "since",
+      "name": "Auction start date filter",
+      "type": "text",
+      "values": [
+        {
+          "id": "today",
+          "name": "Publicados hoy",
+          "results": 156
+        }
+      ]
+    },
+    {
+      "id": "until",
+      "name": "Auction stop filter",
+      "type": "text",
+      "values": [
+        {
+          "id": "today",
+          "name": "Ending today",
+          "results": 60
+        }
+      ]
+    },
+    {
+
+
+PRECIO --  "available_filters": 
+
+    {
+      "id": "price",
+      "name": "Precio",
+      "type": "range",
+      "values": [
+        {
+          "id": "*-4500.0",
+          "name": "Up to $4.500",
+          "results": 3025
+        },
+        {
+          "id": "4500.0-10000.0",
+          "name": "$4.500 to $10.000",
+          "results": 3410
+        },
+        {
+          "id": "10000.0-*",
+          "name": "More than $10.000",
+          "results": 3640
+        }
+      ]
+    },
+    {
+	
+
+
+
+&access_token=APP_USR-4356864570032399-092419-5ff883ea5511c980c12fe9416ed0a729-12348961
+
+
+https://api.mercadolibre.com/items?ids=MLA737841365,MLA594239600&attributes=id,title,seller_id,price,available_quantity,status
+
+[
+  {
+    "available_quantity": 1,
+    "id": "MLA737841365",
+    "price": 39999,
+    "seller_id": 143125485,
+    "status": "active",
+    "title": "Notebook Hp 15.6 Core I7 Ram 8gb 15-da0062la"
+  }
+]
+
+
+
