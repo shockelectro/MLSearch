@@ -4,6 +4,30 @@ import android.provider.BaseColumns;
 
 public class dbSchemaContract implements BaseColumns {
 
+    /*  ======================================
+            TABLA VENDEDORES
+        ======================================
+    */
+    public static abstract class VendedorEntry implements BaseColumns {
+        //Constantes campos tabla vendedores
+        public static final String TABLE_NAME="vendedor";
+        public static final String ID="id";
+        public static final String NOMBRE ="nombre";
+        public static final String TELEFONO ="telefono";
+        public static final String LOCALIDAD ="localidad";
+    }
+
+    public static final String CREAR_TABLA_VENDEDOR=
+            "CREATE TABLE " + VendedorEntry.TABLE_NAME +" (" +
+                    VendedorEntry.ID + " " + "INTEGER, " +
+                    VendedorEntry.NOMBRE +" TEXT, " +
+                    VendedorEntry.TELEFONO +" TEXT, " +
+                    VendedorEntry.LOCALIDAD + "TEXT, " +
+                    "PRIMARY KEY ("+ VendedorEntry.ID+ "))";
+
+    public static final String BORRAR_TABLA_VENDEDOR=
+            "DROP TABLE IF EXISTS " + VendedorEntry.TABLE_NAME;
+
 /*  ======================================
         TABLA USUARIO
     ======================================
@@ -140,7 +164,7 @@ public class dbSchemaContract implements BaseColumns {
         TABLA ALERTA
         ============================================================================================
     */
-    private static abstract class AlertaEntry implements BaseColumns {
+    public static abstract class AlertaEntry implements BaseColumns {
         public static final String TABLE_NAME ="alerta";
 
         public static final String _ID = "_id";

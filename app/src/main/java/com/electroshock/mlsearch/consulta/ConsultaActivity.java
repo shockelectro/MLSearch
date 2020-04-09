@@ -17,6 +17,7 @@ import com.electroshock.mlsearch.data.Alerta;
 import com.electroshock.mlsearch.data.DbHelper;
 import com.electroshock.mlsearch.model.NoteML;
 import com.electroshock.mlsearch.model.Producto;
+import com.electroshock.mlsearch.sqlite.dbSchemaContract;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;

@@ -18,8 +18,8 @@ import com.electroshock.mlsearch.consulta.ConsultaActivity;
 import com.electroshock.mlsearch.R;
 import com.electroshock.mlsearch.addeditalerta.AddEditAlertaActivity;
 import com.electroshock.mlsearch.alertadetail.AlertaDetailActivity;
-import com.electroshock.mlsearch.data.AlertaContract;
 import com.electroshock.mlsearch.data.DbHelper;
+import com.electroshock.mlsearch.sqlite.dbSchemaContract;
 
 public class AlertasFragment extends Fragment {
     public static final int REQUEST_UPDATE_DELETE_ALERT = 2;
@@ -59,7 +59,7 @@ public class AlertasFragment extends Fragment {
                 //TODO Llamada de listaalertas
                 Cursor currentAlerta = (Cursor) mAlertasAdapter.getItem(i);
                 String currentAlertaId = currentAlerta.getString(
-                        currentAlerta.getColumnIndex(AlertaContract.AlertaEntry._ID));
+                        currentAlerta.getColumnIndex(dbSchemaContract.AlertaEntry._ID));
 
                 //TODO cambiar showdetail por ConsultaActivity
                 //showDetailScreen(currentAlertaId);

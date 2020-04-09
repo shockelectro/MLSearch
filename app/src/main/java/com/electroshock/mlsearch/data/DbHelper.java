@@ -5,17 +5,17 @@ package com.electroshock.mlsearch.data;
  */
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.electroshock.mlsearch.data.ItemContract.ItemEntry;
-import com.electroshock.mlsearch.data.AlertaContract.AlertaEntry;
 import com.electroshock.mlsearch.sqlite.dbSchemaContract;
 
 
 public class DbHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 2;
-    public static final String DATABASE_NAME = "itemsMA5.db";
+    public static final String DATABASE_NAME = "itemsMA7.db";
+    //protected static SQLiteDatabase bdAlertas;
+
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -25,14 +25,18 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //Este metodo se ejecuta por unica vez
         db.execSQL(dbSchemaContract.CREAR_TABLA_ITEM);
+        db.execSQL(dbSchemaContract.CREAR_TABLA_VENDEDOR);
         db.execSQL(dbSchemaContract.CREAR_TABLA_ALERTA);
 
         // TInsertar datos ficticios para prueba inicial
-        mockData(db);
-        mockDataAlertas(db);
+        mockItem(db);
+        mockAlertas(db);
+        mockVendedor(db);
     }
 
-    private void mockData(SQLiteDatabase sqLiteDatabase) {
+
+
+    private void mockItem(SQLiteDatabase sqLiteDatabase) {
         mockItem(sqLiteDatabase, new Item("7658765", "Toshiba n55",
                 "12000", "used", "9873241","MLA399858","2018-09-18T03:25:36.000Z","2018-09-25T03:25:36.000Z",
                 "2018-09-18T03:25:36.000Z", "2018-09-24T21:17:52.548Z",
@@ -47,26 +51,40 @@ public class DbHelper extends SQLiteOpenHelper {
                 "-34.91102","-57.958046")); */
     }
 
-    private void mockDataAlertas(SQLiteDatabase sqLiteDatabase) {
+    private void mockAlertas(SQLiteDatabase sqLiteDatabase) {
         mockAlerta(sqLiteDatabase, new Alerta("i7","MLA399858", "nuevo","1000","20000"));
         mockAlerta(sqLiteDatabase, new Alerta("i3","MLA098234","usado", "40","10000"));
         mockAlerta(sqLiteDatabase, new Alerta("i5","MLA923842","usado", "0","10000"));
+    }
+
+    private void mockVendedor(SQLiteDatabase sqLiteDatabase) {
+        mockVendedor(sqLiteDatabase, new Vendedor("0","pedro","4444-5896","Lanus"));
+        mockVendedor(sqLiteDatabase, new Vendedor("1","alejandro","4362-5226","Avellaneda"));
+        mockVendedor(sqLiteDatabase, new Vendedor("2","javier","4208-3265","Lomas de Zamora"));
     }
 
     private void mockRegistroBusqueda(SQLiteDatabase sqLiteDatabase){
 
     }
 
+    public long mockVendedor(SQLiteDatabase db, Vendedor vendedor){
+        return db.insert(
+                dbSchemaContract.VendedorEntry.TABLE_NAME,
+                null,
+                vendedor.toContentValues());
+
+    }
+
     public long mockItem(SQLiteDatabase db, Item item) {
         return db.insert(
-                ItemEntry.TABLE_NAME,
+                dbSchemaContract.ItemEntry.TABLE_NAME,
                 null,
                 item.toContentValues());
     }
 
     public long mockAlerta(SQLiteDatabase db, Alerta alerta) {
         return db.insert(
-                AlertaEntry.TABLE_NAME,
+                dbSchemaContract.AlertaEntry.TABLE_NAME,
                 null,
                 alerta.toContentValues());
     }
@@ -89,7 +107,7 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
         return sqLiteDatabase.insert(
-                AlertaEntry.TABLE_NAME,
+                dbSchemaContract.AlertaEntry.TABLE_NAME,
                 null,
                 alerta.toContentValues());
     }
@@ -109,7 +127,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Cursor getAllAlertas() {
         return getReadableDatabase()
                 .query(
-                        AlertaEntry.TABLE_NAME,
+                        dbSchemaContract.AlertaEntry.TABLE_NAME,
                         null,
                         null,
                         null,
@@ -135,9 +153,9 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         //String[] largs = new String[] {alertaId};
         Cursor c = db.query(
-                AlertaEntry.TABLE_NAME,
+                dbSchemaContract.AlertaEntry.TABLE_NAME,
                 null,
-                AlertaEntry._ID + " =?" ,
+                dbSchemaContract.AlertaEntry._ID + " =?" ,
                 new String[] {alertaId},
                 null,
                 null,
@@ -154,9 +172,16 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public int deleteAlerta(String alertaId) {
         return getWritableDatabase().delete(
-                AlertaEntry.TABLE_NAME,
-                AlertaEntry._ID + " LIKE ?",
+                dbSchemaContract.AlertaEntry.TABLE_NAME,
+                dbSchemaContract.AlertaEntry._ID + " LIKE ?",
                 new String[]{alertaId});
+    }
+
+    public int deleteVendedor(String vendedorId) {
+        return getWritableDatabase().delete(
+                dbSchemaContract.VendedorEntry.TABLE_NAME,
+                dbSchemaContract.VendedorEntry._ID + " LIKE ?",
+                new String[]{vendedorId});
     }
 
     public int updateItem(Item item, String itemId) {
@@ -169,9 +194,9 @@ public class DbHelper extends SQLiteOpenHelper {
     }
     public int updateAlerta(Alerta alerta, String alertaId) {
         return getWritableDatabase().update(
-                AlertaEntry.TABLE_NAME,
+                dbSchemaContract.AlertaEntry.TABLE_NAME,
                 alerta.toContentValues(),
-                AlertaEntry._ID + " LIKE ?",
+                dbSchemaContract.AlertaEntry._ID + " LIKE ?",
                 new String[]{alertaId}
         );
     }

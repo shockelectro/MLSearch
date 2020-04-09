@@ -16,8 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.electroshock.mlsearch.R;
-import com.electroshock.mlsearch.data.AlertaContract;
-import com.electroshock.mlsearch.data.ItemContract;
+import com.electroshock.mlsearch.sqlite.dbSchemaContract;
 
 public class AlertasCursorAdapter  extends CursorAdapter {
     public AlertasCursorAdapter(Context context, Cursor c) {
@@ -38,7 +37,7 @@ public class AlertasCursorAdapter  extends CursorAdapter {
         final ImageView avatarImage = (ImageView) view.findViewById(R.id.iv_avatar);
 
         // Get valores.
-        String name = cursor.getString(cursor.getColumnIndex(AlertaContract.AlertaEntry.TITTLE));
+        String name = cursor.getString(cursor.getColumnIndex(dbSchemaContract.AlertaEntry.TITTLE));
         // String avatarUri = cursor.getString(cursor.getColumnIndex(ItemContract.ItemEntry.AVATAR_URI));
 
         // Setup.

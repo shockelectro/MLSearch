@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.electroshock.mlsearch.consulta.ConsultaActivity;
+import com.electroshock.mlsearch.data.DbHelper;
 import com.electroshock.mlsearch.sqlite.DatabaseAdapter;
 
 import static com.electroshock.mlsearch.R.layout.activity_main;
@@ -21,12 +22,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(activity_main); //Error
 
-        dba = new DatabaseAdapter(getApplicationContext());
+        //dba = new DatabaseAdapter(getApplicationContext());
 
         //ConexionSQLiteHelper conn=new ConexionSQLiteHelper(this,"bd_items",null,1);
         //db=conn.getWritableDatabase();
 
     }
+
 
     public void onClick(View view) {
         Intent miIntent=null;
@@ -65,10 +67,13 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onDestroy() {
         // TODO Auto-generated method stub
+        getBaseContext().deleteDatabase(DbHelper.DATABASE_NAME);
+
         super.onDestroy();
 
         // Close The Database
-        dba.close();
+        //dba.close();
+
     }
 
 }
